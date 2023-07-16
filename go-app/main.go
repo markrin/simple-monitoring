@@ -71,12 +71,30 @@ func init() {
 	prometheus.Register(httpDuration)
 }
 
+func serverIsHealthy() bool {
+	return true
+}
+
+func healthHandler(w http.ResponseWriter, r *http.Request) {
+	// Check the health of the server and return a status code accordingly
+	if serverIsHealthy() {
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprint(w, "OK")
+	}
+}
+
 func main() {
 	router := mux.NewRouter()
 	router.Use(prometheusMiddleware)
 
 	// Prometheus endpoint
 	router.Path("/metrics").Handler(promhttp.Handler())
+
+	// liveness endpoint
+	router.Path("/live").Handler(http.HandlerFunc(healthHandler))
+
+	// readiness endpoint - same function
+	router.Path("/ready").Handler(http.HandlerFunc(healthHandler))
 
 	// Serving static files
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("../static/")))
