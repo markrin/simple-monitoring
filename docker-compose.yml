@@ -8,6 +8,11 @@ services:
       - "3000:3000"
     volumes:
       - grafana-storage:/var/lib/grafana
+      - ./grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./grafana/datasources:/etc/grafana/provisioning/datasources
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin1
+      - GF_SECURITY_ADMIN_USER=admin1
     networks:
       - mynetwork
   
@@ -23,7 +28,7 @@ services:
       - mynetwork
   
   prometheus:
-    image: prom/prometheus:v2.45.0
+    image: prom/prometheus:${PROMETHEUS_VERSION}
     volumes:
       - ./prometheus/:/etc/prometheus/
       - prometheus_data:/prometheus
