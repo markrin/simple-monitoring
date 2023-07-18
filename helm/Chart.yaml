@@ -1,0 +1,7 @@
+apiVersion: v2
+name: monitoring-deploy
+description: A Helm chart for deployment of Go web server with monitoring Minikube
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
+

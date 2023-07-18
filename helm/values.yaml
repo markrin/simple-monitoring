@@ -1,0 +1,16 @@
+# Default values for deploy.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+grafanapass: admin1
+grafanauser: admin1
+
+prometheus-version: v2.45.0
+
+grafana-version: 10.0.1
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
