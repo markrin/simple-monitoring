@@ -9,4 +9,9 @@ docker run --rm -p 9000:9000 go-app:0.x
 
 docker compose -d up
 
-# for grafana connection use prometheus domain name: http://simple-monitoring-prometheus-1:9090
+go to browser and open
+http://localhost/3000
+
+log/pass admin1/admin1
+
+click Dashboards > my dashboard

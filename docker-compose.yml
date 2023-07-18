@@ -13,15 +13,17 @@ services:
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=admin1
       - GF_SECURITY_ADMIN_USER=admin1
+      - GF_USERS_ALLOW_SIGN_UP=false
     networks:
       - mynetwork
+    restart: unless-stopped
   
   go-app:
     build:
       context: ./go-app
       dockerfile: ./Dockerfile
     container_name: go-app
-    restart: always
+    restart: unless-stopped
     ports:
       - '9000:9000'
     networks:
@@ -39,7 +41,21 @@ services:
       - '--web.console.templates=/usr/share/prometheus/consoles'
     ports:
       - 9090:9090
-    restart: always
+    restart: unless-stopped
+    networks:
+      - mynetwork
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: monitoring_cadvisor
+    restart: unless-stopped
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    ports:
+      - 8081:8080
     networks:
       - mynetwork
 
