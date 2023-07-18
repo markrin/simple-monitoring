@@ -15,3 +15,6 @@ http://localhost/3000
 log/pass admin1/admin1
 
 click Dashboards > my dashboard
+
+------
+!!! take a look at 'Helm' branch please
