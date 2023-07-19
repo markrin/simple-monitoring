@@ -2,7 +2,7 @@
 test task implementing prometheus+grafana for simple web app
 
 
-run commands: 
+run commands
 
 for web app itself:
 > cd ./go-app
@@ -14,10 +14,10 @@ for web app itself:
 for full setup:
 > docker compose -d up
 
-go to browser and open
+go to browser and open Grafana UI
 http://localhost/3000
 
-log/pass admin1/admin1
+log in with creadentials log/pass admin1/admin1
 
 click Dashboards > my dashboard
 
